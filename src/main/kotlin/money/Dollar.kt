@@ -1,10 +1,13 @@
 package money
 
-class Dollar(i: Int) {
-    val amount: Int = TODO()
-
-    fun times(i: Int) {
-        TODO("Not yet implemented")
+class Dollar {
+    var amount: Int
+    constructor(i: Int){
+        amount = i
     }
 
+    fun times(i: Int): Dollar {
+        this.amount *= i
+        return Dollar(this.amount)
+    }
 }
