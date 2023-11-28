@@ -1,13 +1,8 @@
 package money
 
-class Dollar {
-    var amount: Int
-    constructor(i: Int){
-        amount = i
-    }
+class Dollar(override var amount: Int): Money(amount) {
 
-    fun times(i: Int): Dollar {
-        this.amount *= i
-        return Dollar(this.amount)
+    fun times(multiplier: Int): Dollar {
+        return Dollar(this.amount * multiplier)
     }
 }
