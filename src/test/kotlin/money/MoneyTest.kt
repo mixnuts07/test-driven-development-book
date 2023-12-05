@@ -1,31 +1,41 @@
 package money
 
+import io.mockk.every
+import io.mockk.mockkClass
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 class MoneyTest {
+//    val dollar = mockkClass(Dollar::class)
+
     @Test
     fun testMultiplication() {
-        val five = Dollar(5)
-        assertEquals(Dollar(10), five.times(2))
-        assertEquals(Dollar(15), five.times(3))
+        val five = Money.dollar(5)
+        assertEquals(Money.dollar(10), five.times(2))
+        assertEquals(Money.dollar(15), five.times(3))
     }
 
     @Test
     fun testEquality() {
-        assertTrue { (Dollar(5).equals(Dollar(5))) }
-        assertFalse { (Dollar(5).equals(Dollar(6))) }
-        assertTrue { (Franc(5).equals(Franc(5))) }
-        assertFalse { (Franc(5).equals(Franc(6))) }
-        assertFalse { (Franc(5).equals(Dollar(5))) }
+        assertTrue { (Money.dollar(5).equals(Money.dollar(5))) }
+        assertFalse { (Money.dollar(5).equals(Money.dollar(6))) }
+        assertTrue { (Money.franc(5).equals(Money.franc(5))) }
+        assertFalse { (Money.franc(5).equals(Money.franc(6))) }
+        assertFalse { (Money.franc(5).equals(Money.dollar(5))) }
     }
 
     @Test
     fun testFrancMultiplication() {
-        val five = Franc(5)
-        assertEquals(Franc(10), five.times(2))
-        assertEquals(Franc(15), five.times(3))
+        val five = Money.franc(5)
+        assertEquals(Money.franc(10), five.times(2))
+        assertEquals(Money.franc(15), five.times(3))
+    }
+
+    @Test
+    fun testCurrency(){
+        assertEquals("USD", Money.dollar(1).currency())
+        assertEquals("CHF", Money.franc(1).currency())
     }
 }
