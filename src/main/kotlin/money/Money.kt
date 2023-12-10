@@ -2,22 +2,31 @@ package money
 
 import java.util.Currency
 
-abstract class Money(open var amount: Int, open var currency: String) {
-    abstract fun times(multiplier: Int): Money
+open class Money(open var amount: Int, open var currency: String) {
+    fun times(multiplier: Int): Money {
+        return Money(this.amount * multiplier, currency)
+    }
+//    TODO assetEqualsで使用しているequalsを上書きたい
     fun equals(money: Money): Boolean {
-        if (this === money) return true
         return this.amount == money.amount && this.currency == money.currency
-        return false
+    }
+    override fun toString(): String {
+        return "$amount + ' ' + $currency"
     }
     fun currency(): String {
         return currency
     }
+
+    fun plus(dollar: Money): Expression {
+        TODO()
+    }
+
     companion object {
-        fun dollar(amount: Int): Dollar {
-            return Dollar(amount, "USD")
+        fun dollar(amount: Int): Money {
+            return Money(amount, "USD")
         }
-        fun franc(amount: Int): Franc {
-            return Franc(amount, "CHF")
+        fun franc(amount: Int): Money {
+            return Money(amount, "CHF")
         }
     }
 }
