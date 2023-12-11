@@ -2,13 +2,16 @@ package money
 
 import java.util.Currency
 
-open class Money(open var amount: Int, open var currency: String) {
+open class Money(open var amount: Int, open var currency: String): Expression {
     fun times(multiplier: Int): Money {
         return Money(this.amount * multiplier, currency)
     }
-//    TODO assetEqualsで使用しているequalsを上書きたい
-    fun equals(money: Money): Boolean {
-        return this.amount == money.amount && this.currency == money.currency
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Money) return false
+
+        return amount == other.amount && currency == other.currency
     }
     override fun toString(): String {
         return "$amount + ' ' + $currency"
@@ -18,7 +21,7 @@ open class Money(open var amount: Int, open var currency: String) {
     }
 
     fun plus(dollar: Money): Expression {
-        TODO()
+        return Money(amount * dollar.amount, currency)
     }
 
     companion object {
