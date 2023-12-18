@@ -14,7 +14,7 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
-    testImplementation("io.mockk:mockk:1.9.1")
+    testImplementation("io.mockk:mockk:1.10.3-jdk8")
 }
 
 tasks.test {
