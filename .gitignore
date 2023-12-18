@@ -41,4 +41,4 @@ bin/
 ### Mac OS ###
 .DS_Store
 
-./two-sec-python/venv/
+two-sec-python/venv/
